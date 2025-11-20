@@ -9,19 +9,19 @@ const MentalHealthPage = () => {
       icon: "fas fa-brain",
       title: "CBT-Based Exercises",
       desc: "Interactive worksheets and reflection prompts to help you reshape negative thought patterns.",
-      link: "#cbt-section",
+      link: "/dailyhealing",
     },
     {
       icon: "fas fa-book-open",
       title: "Resource Library",
       desc: "Access a growing collection of articles, videos, and tools from trusted mental health experts.",
-      link: "#library-section",
+      link: "/resources",
     },
     {
       icon: "fas fa-robot",
       title: "24/7 AI Emotional Support",
       desc: "Chat anytime with our compassionate AI companion — your safe space to talk and feel understood.",
-      link: "#ai-section",
+      link: "/ai",
     },
   ];
 

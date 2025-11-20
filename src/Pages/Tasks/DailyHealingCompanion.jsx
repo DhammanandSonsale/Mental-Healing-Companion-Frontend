@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const DailyHealingCompanion = () => {
   const [affirmation, setAffirmation] = useState("");
@@ -59,149 +60,168 @@ const DailyHealingCompanion = () => {
     },
   ];
 
-  // CBT-based exercise cards
   const cbtExercises = [
     {
       title: "Thought Reframe",
-      desc: "Write down a negative thought and replace it with a more balanced one.",
-      tip: "Example: 'I always fail' → 'I’ve faced challenges before and learned each time.'",
+      desc: "Write down a negative thought and replace it with a balanced one.",
+      tip: "Example: 'I always fail' → 'I’ve learned from every challenge.'",
     },
     {
       title: "Self-Compassion Break",
       desc: "Pause and acknowledge your feelings without judgment.",
-      tip: "Put your hand on your chest and say: 'It’s okay to feel this way.'",
+      tip: "'It’s okay to feel this way.'",
     },
     {
       title: "Gratitude Anchoring",
       desc: "Think of one thing that brought you small joy today.",
-      tip: "It could be as simple as sunlight on your face or a kind word.",
+      tip: "Maybe sunlight, music, or a kind word.",
     },
   ];
 
   return (
-    <section className="min-h-screen py-20 px-6 py-24 sm:px-10 md:px-16 bg-gradient-to-b from-indigo-50 via-white to-indigo-50">
-      <div className="max-w-3xl mx-auto text-center">
-        {/* Header */}
-        <h1 className="text-4xl md:text-5xl font-bold text-indigo-600 mb-3 flex items-center justify-center gap-2">
-          Daily Healing Companion <span>🌿</span>
-        </h1>
-        <p className="text-gray-600 mb-10 text-lg">
-          Small, mindful actions each day can lead to big emotional healing.
-        </p>
+    <section className="min-h-screen px-6 py-32 sm:px-10 md:px-16 bg-gradient-to-b from-indigo-100 via-white to-indigo-100">
+      <div className="max-w-5xl mx-auto">
+        {/* HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-5xl font-bold text-indigo-700 mb-3 flex justify-center items-center gap-3">
+            Daily Healing Companion 🌿
+          </h1>
+          <p className="text-gray-600 text-lg max-w-xl mx-auto">
+            A gentle space designed to help you heal through mindful actions,
+            reflection, and calming experiences.
+          </p>
+        </motion.div>
 
-        {/* Affirmation */}
-        <div className="bg-white shadow-md rounded-2xl p-6 mb-10 border border-indigo-100 hover:shadow-lg transition">
-          <h2 className="text-lg font-semibold text-indigo-600 mb-2">
+        {/* AFFIRMATION */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-white/70 backdrop-blur-lg shadow-xl rounded-3xl p-8 border border-indigo-200 mb-16"
+        >
+          <h2 className="text-xl font-semibold text-indigo-600 mb-2">
             🦋 Daily Affirmation
           </h2>
-          <p className="text-gray-800 italic text-lg">“{affirmation}”</p>
-        </div>
+          <p className="text-gray-900 text-xl italic">“{affirmation}”</p>
+        </motion.div>
 
-        {/* Healing Tasks */}
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex justify-center gap-2 items-center">
+        {/* BENTO GRID TASKS */}
+        <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
           🌸 Your Healing Tasks
         </h2>
-        <div className="grid gap-4">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-20">
           {tasks.map((t) => (
-            <div
+            <motion.div
               key={t.id}
-              className={`flex items-center justify-between p-5 rounded-xl border shadow-sm transition backdrop-blur-sm ${
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`p-6 rounded-2xl shadow-lg border transition-all cursor-pointer hover:scale-[1.03] bg-white/80 backdrop-blur-lg ${
                 completed.includes(t.id)
-                  ? "bg-green-50 border-green-400"
-                  : "bg-white border-gray-200"
+                  ? "border-green-500 bg-green-50"
+                  : "border-indigo-200"
               }`}
+              onClick={() => toggleComplete(t.id)}
             >
-              <div className="text-left">
-                <p className="font-semibold text-indigo-600">{t.category}</p>
-                <p className="text-gray-700">{t.task}</p>
-              </div>
+              <p className="font-semibold text-indigo-600 text-lg">
+                {t.category}
+              </p>
+              <p className="text-gray-700 mt-2">{t.task}</p>
+
               <button
-                onClick={() => toggleComplete(t.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium ${
+                className={`mt-4 px-4 py-2 rounded-full text-sm font-medium transition ${
                   completed.includes(t.id)
                     ? "bg-green-500 text-white"
-                    : "bg-indigo-100 text-indigo-600 hover:bg-indigo-200"
+                    : "bg-indigo-100 text-indigo-700"
                 }`}
               >
-                {completed.includes(t.id) ? "Done" : "Mark Done"}
+                {completed.includes(t.id) ? "Completed ✓" : "Mark Done"}
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* CBT Exercises */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center justify-center gap-2">
-            🧠 CBT-Based Exercises
-          </h2>
-          <p className="text-gray-600 mb-8 max-w-lg mx-auto">
-            Try one of these small, guided reflections inspired by Cognitive
-            Behavioral Therapy to help reset your thoughts and emotions.
-          </p>
+        {/* CBT EXERCISES */}
+        <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+          🧠 CBT-Based Exercises
+        </h2>
+        <p className="text-gray-600 text-center max-w-lg mx-auto mb-10">
+          Practice small reflections that can gently shift your thoughts and
+          emotions.
+        </p>
 
-          <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
-            {cbtExercises.map((ex, i) => (
-              <div
-                key={i}
-                className="p-6 bg-white rounded-2xl shadow-md border border-indigo-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 text-left"
-              >
-                <h3 className="text-indigo-600 font-semibold text-lg mb-2">
-                  {ex.title}
-                </h3>
-                <p className="text-gray-700 text-sm mb-3">{ex.desc}</p>
-                <p className="text-indigo-500 text-sm italic">{ex.tip}</p>
-              </div>
-            ))}
-          </div>
+        <div className="grid md:grid-cols-3 gap-8 mb-24">
+          {cbtExercises.map((ex, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-6 rounded-3xl bg-white/80 border border-indigo-200 shadow-lg hover:shadow-xl hover:-translate-y-1 transition text-left"
+            >
+              <h3 className="text-indigo-600 text-xl font-semibold mb-2">
+                {ex.title}
+              </h3>
+              <p className="text-gray-700 text-sm mb-3">{ex.desc}</p>
+              <p className="text-indigo-500 text-sm italic">{ex.tip}</p>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Videos */}
-        <div className="mt-20">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            🌬️ Instant Relief Videos
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-10 justify-center">
-            {instantReliefVideos.map((vid, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="relative w-full max-w-[280px] mx-auto overflow-hidden aspect-[9/16] rounded-xl">
-                  {playing === index ? (
-                    <video
-                      src={vid.src}
-                      autoPlay
-                      playsInline
-                      muted
-                      className="w-full h-full object-cover rounded-xl"
-                      onEnded={() => setPlaying(null)}
-                    ></video>
-                  ) : (
-                    <>
-                      <img
-                        src={vid.thumbnail}
-                        alt={vid.title}
-                        className="w-full h-full object-cover rounded-xl"
-                      />
-                      <button
-                        onClick={() => setPlaying(index)}
-                        className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/50 transition"
+        {/* VIDEOS */}
+        <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+          🌬️ Instant Relief Videos
+        </h2>
+
+        <div className="grid sm:grid-cols-2 gap-12 justify-center">
+          {instantReliefVideos.map((vid, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center"
+            >
+              <div className="relative w-full max-w-[300px] overflow-hidden rounded-2xl shadow-xl border border-indigo-200">
+                {playing === index ? (
+                  <video
+                    src={vid.src}
+                    autoPlay
+                    playsInline
+                    muted
+                    className="w-full h-full object-cover"
+                    onEnded={() => setPlaying(null)}
+                  />
+                ) : (
+                  <>
+                    <img
+                      src={vid.thumbnail}
+                      alt={vid.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <button
+                      onClick={() => setPlaying(index)}
+                      className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-16 h-16 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-16 h-16 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </button>
-                    </>
-                  )}
-                </div>
-                <p className="text-gray-700 text-sm mt-3 italic">
-                  {vid.description}
-                </p>
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </button>
+                  </>
+                )}
               </div>
-            ))}
-          </div>
+
+              <p className="text-gray-700 text-sm mt-3 italic text-center">
+                {vid.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

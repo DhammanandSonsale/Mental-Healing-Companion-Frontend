@@ -14,5 +14,56 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+  createChat({
+    webhookUrl: 'http://localhost:5678/webhook/f17cd22e-8b22-4b96-89e3-71ad3a481d1b/chat',
+    popover: true,
+    theme: {
+      // 🌈 BRAND COLORS (MATCH YOUR UI)
+      primary: "#6366f1",               // Purple header + send button
+      background: "#ffffff",            // Clean white background
+      text: "#0f172a",                  // Dark modern text
+
+      // 💬 MESSAGE BUBBLES (Minimal + Soft)
+      bubbleBackground: "#f1f5f9",      // Light gray (like your sections)
+      bubbleText: "#0f172a",
+
+      // 🤖 BOT MESSAGES (soft light purple background)
+      botBubbleBackground: "#eef2ff",   // very light indigo
+      botBubbleText: "#4f46e5",
+
+      // 🟣 USER SIDE ACCENT
+      userBubbleBackground: "#6366f1",
+      userBubbleText: "#ffffff",
+
+      // 🔘 FAB / CHAT ICON
+      launcherColor: "#6366f1",
+      launcherText: "#ffffff",
+      launcherShadow: "rgba(99, 102, 241, 0.4)"
+    },
+
+    // OPTIONAL: make UI more minimal
+    layout: {
+      width: "360px",
+      borderRadius: "20px",
+      showHeaderCloseButton: true,
+      showFooter: true
+    },
+
+    // OPTIONAL: custom texts
+    title: "AI Support",
+    subtitle: "Here to listen & help 💜",
+    initialMessage: "Hi! How are you feeling today?"
+  });
+</script>
+
+
   </body>
 </html>

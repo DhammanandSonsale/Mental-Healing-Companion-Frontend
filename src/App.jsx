@@ -10,6 +10,8 @@ import Que from './Pages/Questionaire/Que.jsx';
 import Login from './Pages/User/Login.jsx';
 import UserDashboard from './Pages/Profile/Dashboard.jsx';
 import { Route, Routes } from 'react-router-dom';
+import './index.css';
+import NotFound from './Pages/NotFound.jsx';
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
         <Route path="/questionaire" element={<Que />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<UserDashboard />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

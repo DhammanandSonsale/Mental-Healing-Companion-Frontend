@@ -17,35 +17,38 @@ const Contact = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const contactForm = document.getElementById("contact-form");
-    const formSuccess = document.getElementById("form-success");
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const validateEmail = (email) =>
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.toLowerCase());
+  const formSuccess = document.getElementById("form-success");
+  const contactForm = document.getElementById("contact-form");
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      let valid = true;
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const subject = document.getElementById("subject").value.trim();
+  const message = document.getElementById("message").value.trim();
 
-      const name = document.getElementById("name");
-      const email = document.getElementById("email");
-      const message = document.getElementById("message");
+  if (!name || !email || !message) {
+    alert("Please fill in all required fields correctly.");
+    return;
+  }
 
-      if (!name.value.trim() || !validateEmail(email.value) || !message.value.trim()) {
-        valid = false;
-        alert("Please fill in all required fields correctly.");
-        return;
-      }
+  const res = await fetch("http://localhost:8080/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, subject, message }),
+  });
 
-      formSuccess.classList.remove("hidden");
-      contactForm.reset();
-      setTimeout(() => formSuccess.classList.add("hidden"), 4000);
-    };
+  const data = await res.json();
 
-    contactForm?.addEventListener("submit", handleSubmit);
-    return () => contactForm?.removeEventListener("submit", handleSubmit);
-  }, []);
+  if (data.success) {
+    formSuccess.classList.remove("hidden");
+    contactForm.reset();
+    setTimeout(() => formSuccess.classList.add("hidden"), 4000);
+  } else {
+    alert("Something went wrong. Try again.");
+  }
+};
 
   return (
     <section className="py-24 mx-6 sm:mx-10 md:mx-16 min-h-screen">
@@ -77,7 +80,7 @@ const Contact = () => {
               ✅ Your message has been sent successfully!
             </div>
 
-            <form id="contact-form" className="space-y-5">
+            <form id="contact-form" onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label
                   htmlFor="name"

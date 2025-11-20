@@ -1,1 +1,5 @@
 @import "tailwindcss";
+:root {
+  --chat--bubble-user: #4f46e5 !important;
+  --chat--bubble-bot: #e0e7ff !important;
+}
