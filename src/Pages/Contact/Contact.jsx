@@ -33,7 +33,7 @@ const Contact = () => {
     return;
   }
 
-  const res = await fetch("https://mental-healing-companion-backend.vercel.app/api/contact", {
+  const res = await fetch("http://localhost:8080/api/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, subject, message }),
