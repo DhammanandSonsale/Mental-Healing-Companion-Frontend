@@ -18,7 +18,7 @@ export default function Dashboard() {
         }
 
         const userId = storedUser._id;
-        const res = await fetch(`http://localhost:8080/api/dashboard/${userId}`);
+        const res = await fetch(`https://mental-healing-companion-backend.vercel.app/${userId}`);
         if (!res.ok) throw new Error("Failed to fetch dashboard data");
         const result = await res.json();
         setData(result);

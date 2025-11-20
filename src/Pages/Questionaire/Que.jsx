@@ -155,12 +155,12 @@ const Questionnaire = () => {
     const payload = computeResultPayload();
 
     try {
-      await axios.post("http://localhost:8080/api/quiz/submit", payload);
+      await axios.post("https://mental-healing-companion-backend.vercel.app/api/quiz/submit", payload);
       setResult(payload);
       setSubmitted(true);
 
       const res = await axios.get(
-        `http://localhost:8080/api/content/${payload.level}`
+        `https://mental-healing-companion-backend.vercel.app/api/content/${payload.level}`
       );
       setSuggestions(res.data.content);
     } catch (err) {
