@@ -87,7 +87,7 @@ const Resources = () => {
   });
 
   return (
-    <section className="min-h-screen py-24 mx-6 sm:mx-10 md:mx-16">
+    <section className="min-h-screen py-32 mx-6 sm:mx-10 md:mx-16">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

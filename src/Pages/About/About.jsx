@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="py-20 mx-6 sm:mx-10 md:mx-16 text-gray-700">
+    <div className="py-20 mx-6 sm:mx-10 md:mx-16 text-gray-700 py-32">
       {/* 💜 Header Section */}
       <section className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl shadow-sm py-20 text-center mb-20">
         <h1 className="text-4xl md:text-5xl font-bold text-indigo-600 mb-6">
